@@ -1,0 +1,3 @@
+[submodule "uwifi"]
+	path = uwifi
+	url = /home/br1/dev/uwifi/uwifi
