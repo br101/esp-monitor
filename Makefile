@@ -21,7 +21,7 @@ LDFLAGS = -Tlinker-script.ld
 # enables removal of unused functions by LD
 CFLAGS += -ffunction-sections -fdata-sections
 LDFLAGS += -Wl,--gc-sections
-LDFLAGS += -L ./uwifi/esp8266
+LDFLAGS += -L ./uwifi
 
 export CFLAGS
 export LDFLAGS
@@ -30,7 +30,7 @@ export CC
 $(NAME)-0x00000.bin: $(NAME)
 	esptool.py elf2image $^
 
-$(NAME): $(OBJS) ./uwifi/esp8266/libuwifi.a
+$(NAME): $(OBJS) ./uwifi/libuwifi.a
 	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS)
 
 flash: $(NAME)-0x00000.bin
@@ -38,7 +38,7 @@ flash: $(NAME)-0x00000.bin
 
 clean:
 	rm -f $(OBJS) $(NAME) $(NAME)-0x00000.bin $(NAME)-0x40000.bin
-	$(MAKE) -C uwifi/esp8266 clean
+	$(MAKE) -C uwifi clean
 
-./uwifi/esp8266/libuwifi.a:
-	$(MAKE) -C uwifi/esp8266
+./uwifi/libuwifi.a:
+	$(MAKE) -C uwifi PLATFORM=esp8266
