@@ -10,7 +10,7 @@ PATH := $(OPEN_SDK)/xtensa-lx106-elf/bin:$(PATH)
 CC = xtensa-lx106-elf-gcc
 # project specific
 CFLAGS += -std=gnu99 -Wall -Wextra -Wno-implicit-function-declaration
-CFLAGS += -I. -I./uwifi/core/ -I./uwifi/ -I./uwifi/esp8266
+CFLAGS += -I. -I./uwifi -I./uwifi/core/ -I./uwifi/util -I./uwifi/esp8266
 # defaults
 CFLAGS += -I$(OPEN_SDK)/sdk/include -I$(OPEN_SDK)/sdk/driver_lib/include/
 CFLAGS += -Os -mlongcalls -fno-inline-functions -mtext-section-literals

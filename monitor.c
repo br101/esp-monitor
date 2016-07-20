@@ -7,7 +7,7 @@
 #include "monitor.h"
 #include "wlan_parser.h"
 #include "node.h"
-#include "util/util.h"
+#include "util.h"
 #include "esp_promisc.h"
 
 static const int channel_time = 500; /* ms */
