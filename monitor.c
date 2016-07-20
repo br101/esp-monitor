@@ -60,7 +60,7 @@ void ICACHE_FLASH_ATTR monitor_rx(uint8 *buf, uint16 len) {
 		pkt.phy_signal = rxc->rssi;
 
 		parse_80211_header((unsigned char*)frame, frame_len, &pkt);
-		node_update(&pkt);
+		node_update(&pkt, &nodes);
 	}
 }
 
@@ -98,7 +98,7 @@ static void timer_func(__attribute__((unused)) void *timer_arg) {
 	wifi_set_channel(ch);
 	os_printf("Channel: %d\n", wifi_get_channel());
 
-	node_timeout();
+	node_timeout(&nodes);
 }
 
 void ICACHE_FLASH_ATTR monitor_start(void) {
