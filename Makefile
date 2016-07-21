@@ -2,7 +2,7 @@ NAME := host-esp
 OBJS := main.o monitor.o
 
 OPEN_SDK ?= /home/br1/dev/esp8266/esp-open-sdk
-SERIAL_PORT ?= /dev/ttyUSB1
+SERIAL_PORT ?= /dev/ttyUSB0
 SERIAL_SPEED ?= 921600
 
 PATH := $(OPEN_SDK)/xtensa-lx106-elf/bin:$(PATH)

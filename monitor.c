@@ -16,7 +16,7 @@ static int ch;
 
 LIST_HEAD(nodes);
 
-struct config conf;
+static unsigned int ntimeout;
 
 static struct packet_info pkt;
 
@@ -98,7 +98,7 @@ static void timer_func(__attribute__((unused)) void *timer_arg) {
 	wifi_set_channel(ch);
 	os_printf("Channel: %d\n", wifi_get_channel());
 
-	node_timeout(&nodes);
+	node_timeout(&nodes, ntimeout);
 }
 
 void ICACHE_FLASH_ATTR monitor_start(void) {
@@ -116,7 +116,7 @@ void ICACHE_FLASH_ATTR monitor_start(void) {
 	wifi_set_promiscuous_rx_cb(monitor_rx);
 	wifi_promiscuous_enable(1);
 	
-	conf.node_timeout = 20000000; /* 20 sec in usec */
+	ntimeout = 20; /* 20 sec */
 
 	os_timer_setfn(&channel_timer, timer_func, NULL);
 	os_timer_arm(&channel_timer, channel_time, true);
