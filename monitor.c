@@ -18,7 +18,7 @@ LIST_HEAD(nodes);
 
 static unsigned int ntimeout;
 
-static struct packet_info pkt;
+static struct uwifi_packet pkt;
 
 void ICACHE_FLASH_ATTR monitor_rx(uint8 *buf, uint16 len) {
 	struct sniffer_buf* sb;
@@ -59,7 +59,7 @@ void ICACHE_FLASH_ATTR monitor_rx(uint8 *buf, uint16 len) {
 		os_memset(&pkt, 0, sizeof(pkt));
 		pkt.phy_signal = rxc->rssi;
 
-		parse_80211_header((unsigned char*)frame, frame_len, &pkt);
+		uwifi_parse_80211_header((unsigned char*)frame, frame_len, &pkt);
 		uwifi_node_update(&pkt, &nodes);
 	}
 }
