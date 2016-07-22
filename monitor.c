@@ -60,12 +60,12 @@ void ICACHE_FLASH_ATTR monitor_rx(uint8 *buf, uint16 len) {
 		pkt.phy_signal = rxc->rssi;
 
 		parse_80211_header((unsigned char*)frame, frame_len, &pkt);
-		node_update(&pkt, &nodes);
+		uwifi_node_update(&pkt, &nodes);
 	}
 }
 
 void ICACHE_FLASH_ATTR nodes_print(void) {
-	struct node_info* n;
+	struct uwifi_node* n;
 	int i = 1;
 	list_for_each(&nodes, n, list) {
 		os_printf("%d. -%d CH%d " MAC_FMT, i++,
@@ -98,7 +98,7 @@ static void timer_func(__attribute__((unused)) void *timer_arg) {
 	wifi_set_channel(ch);
 	os_printf("Channel: %d\n", wifi_get_channel());
 
-	node_timeout(&nodes, ntimeout);
+	uwifi_nodes_timeout(&nodes, ntimeout);
 }
 
 void ICACHE_FLASH_ATTR monitor_start(void) {
