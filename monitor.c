@@ -31,13 +31,13 @@ void ICACHE_FLASH_ATTR monitor_rx(uint8 *buf, uint16 len) {
 		// unreliable, no MAC, no header length, no AMPDU
 		// has: rssi, FEC_CODING
 		rxc = (struct RxControl*)buf;
-		DEBUG("--- RX ???? RSSI %d\n", rxc->rssi);
+		DBG_PRINT("--- RX ???? RSSI %d\n", rxc->rssi);
 		os_printf("~");
 	}
 	else if (len == 128) {
 		// MGMT: 112 bytes of header & data
 		sb2 = (struct sniffer_buf2*)buf;
-		DEBUG("--- RX MGMT cnt %d len %d RSSI %d\n",
+		DBG_PRINT("--- RX MGMT cnt %d len %d RSSI %d\n",
 			  sb2->cnt, sb2->len, sb2->rx_ctrl.rssi);
 		os_printf(",");
 		rxc = &sb2->rx_ctrl;
@@ -47,7 +47,7 @@ void ICACHE_FLASH_ATTR monitor_rx(uint8 *buf, uint16 len) {
 	else {
 		// DATA: 36 bytes of header
 		sb = (struct sniffer_buf*)buf;
-		DEBUG("--- RX DATA cnt %d len %d RSSI %d\n",
+		DBG_PRINT("--- RX DATA cnt %d len %d RSSI %d\n",
 			  sb->cnt, sb->lenseq[0].length, sb->rx_ctrl.rssi);
 		os_printf(".");
 		rxc = &sb->rx_ctrl;
