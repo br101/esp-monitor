@@ -17,7 +17,7 @@ static int ch;
 LIST_HEAD(nodes);
 
 static unsigned int ntimeout;
-
+static uint32_t ntimeoutlast;
 static struct uwifi_packet pkt;
 
 void ICACHE_FLASH_ATTR monitor_rx(uint8 *buf, uint16 len) {
@@ -60,7 +60,7 @@ static void timer_func(__attribute__((unused)) void *timer_arg) {
 	wifi_set_channel(ch);
 	os_printf("Channel: %d\n", wifi_get_channel());
 
-	uwifi_nodes_timeout(&nodes, ntimeout);
+	uwifi_nodes_timeout(&nodes, ntimeout, &ntimeoutlast);
 }
 
 void ICACHE_FLASH_ATTR monitor_start(void) {
